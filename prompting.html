@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grundlagen & Tools - KI im Unterricht</title>
+    <title>Prompting meistern - KI im Unterricht</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -17,11 +17,39 @@
             --dlh-bg-light: #f8f9fa;
         }
         body { font-family: 'Inter', sans-serif; color: var(--dlh-text-dark); }
-        .text-dlh-violet { color: var(--dlh-violet); }
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
-        details[open] summary .arrow-down { transform: rotate(180deg); }
-        details[open] summary { color: var(--dlh-violet); }
+        .prompt-code {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #4a5568;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        .copy-btn:hover { background-color: #718096; }
+        select, textarea {
+            border-color: var(--dlh-border);
+            transition: border-color 0.3s ease;
+        }
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--dlh-violet);
+            box-shadow: 0 0 0 2px rgba(96, 56, 139, 0.2);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -33,8 +61,8 @@
                 <a href="index.html" class="text-xl font-bold text-dlh-violet">KI im Unterricht</a>
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Startseite</a>
-                    <a href="grundlagen.html" class="font-semibold text-dlh-violet border-b-2 border-dlh-violet pb-1">Grundlagen & Tools</a>
-                    <a href="prompting.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Prompting</a>
+                    <a href="grundlagen.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Grundlagen & Tools</a>
+                    <a href="prompting.html" class="font-semibold text-dlh-violet border-b-2 border-dlh-violet pb-1">Prompting</a>
                     <a href="praxisbeispiele.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Anwendungsfälle</a>
                     <a href="faq.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">FAQ</a>
                 </div>
@@ -44,117 +72,143 @@
 
     <div class="container mx-auto px-4 py-8 md:py-12">
         <div class="bg-white p-8 rounded-lg">
-            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-dlh-violet border-b pb-4" style="border-color: var(--dlh-border);"><i class="fas fa-rocket mr-3"></i>Grundlagen: Was ist KI & was kann sie?</h1>
-            
-            <div class="mb-12 p-6 rounded-lg" style="background-color: var(--dlh-bg-light); border: 1px solid var(--dlh-border);">
-                 <h2 class="text-2xl font-bold mb-4 text-dlh-dark">Eine einfache Erklärung</h2>
-                 <p class="text-lg mb-4" style="color: var(--dlh-text-dark);">Stellen Sie sich KI wie einen extrem fleissigen, aber sehr unerfahrenen Praktikanten vor. Er kann unglaublich schnell Muster in riesigen Datenmengen erkennen und auf dieser Basis neue, plausible Texte, Bilder oder Ideen generieren.</p>
-                 <p class="text-lg" style="color: var(--dlh-text-dark);">Er versteht jedoch nicht wirklich, was er sagt, sondern setzt nur statistisch wahrscheinliche Wortfolgen zusammen. Ihre Aufgabe ist es, diesem Praktikanten präzise Anweisungen (Prompts) zu geben und seine Arbeit kritisch zu prüfen.</p>
-            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-dlh-violet border-b pb-4" style="border-color: var(--dlh-border);"><i class="fas fa-magic-wand-sparkles mr-3"></i>Prompting meistern</h1>
+            <p class="text-lg mb-8 max-w-4xl" style="color: var(--dlh-text-light);">Ein guter Prompt ist keine Magie, sondern eine strukturierte Anweisung. Beantworten Sie die folgenden fünf Fragen, um die KI präzise zu steuern und qualitativ hochwertige Ergebnisse zu erhalten.</p>
 
-            <!-- Tool-Explorer - RESTRUCTURED -->
-            <div class="border-t pt-8" style="border-color: var(--dlh-border);">
-                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-dlh-dark">Kuratierte Tool-Übersicht</h2>
-
-                <!-- Sektion 1: Empfohlene Tools im Kanton Zürich -->
-                <section class="mb-12">
-                    <h3 class="text-xl font-bold mb-4 text-dlh-violet pb-2 border-b-2 border-dlh-violet">Empfohlene Tools im Kanton Zürich</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="zh-tools-grid">
-                        <!-- Content will be injected by JavaScript -->
+            <!-- Basic Principles - Updated -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-4 text-dlh-dark">Die 5 Leitfragen für einen perfekten Prompt</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-lg border" style="border-color: var(--dlh-border);">
+                        <h3 class="font-bold text-lg mb-2 text-dlh-violet">1. Was soll entstehen? (Format)</h3>
+                        <p>Definieren Sie das Endprodukt. Z.B. ein Lektionsplan, eine E-Mail, eine Tabelle, ein Bild, ein Code-Snippet.</p>
                     </div>
-                </section>
-
-                <!-- Sektion 2: Kreativ & Interaktiv -->
-                <section class="mb-12">
-                    <h3 class="text-xl font-bold mb-4 text-dlh-dark pb-2 border-b border-gray-300">Weitere nützliche Kreativ- & Interaktiv-Tools</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="kreativ-tools-grid">
-                        <!-- Content will be injected by JavaScript -->
+                    <div class="p-4 rounded-lg border" style="border-color: var(--dlh-border);">
+                        <h3 class="font-bold text-lg mb-2 text-dlh-violet">2. Für wen ist es bestimmt? (Rolle/Zielgruppe)</h3>
+                        <p>Bestimmen Sie das Publikum. Z.B. Lernende im Betrieb, Schulleitende, IKT-Verantwortliche.</p>
                     </div>
-                </section>
-
-                <!-- Sektion 3: Spezialfunktionen & Browser -->
-                <section class="mb-12">
-                    <h3 class="text-xl font-bold mb-4 text-dlh-dark pb-2 border-b border-gray-300">Spezialfunktionen & KI-gestützte Suche</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="suche-tools-grid">
-                        <!-- Content will be injected by JavaScript -->
+                    <div class="p-4 rounded-lg border" style="border-color: var(--dlh-border);">
+                        <h3 class="font-bold text-lg mb-2 text-dlh-violet">3. Wofür wird es gebraucht? (Zweck)</h3>
+                        <p>Beschreiben Sie den Verwendungszweck. Z.B. als Einstieg, zur Prüfungsvorbereitung, für eine Präsentation.</p>
                     </div>
-                </section>
-            </div>
-
-             <!-- Glossar -->
-            <div class="border-t pt-8 mt-12" style="border-color: var(--dlh-border);">
-                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-dlh-dark">Kleines KI-Glossar</h2>
-                <div class="space-y-4">
-                     <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
-                        <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
-                            <span>Was ist ein LLM (Large Language Model)?</span>
-                            <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <div class="p-4 pt-0" style="color: var(--dlh-text-dark);">
-                            <p>Das ist das "Gehirn" hinter Tools wie ChatGPT. Ein LLM ist darauf trainiert, menschliche Sprache zu verarbeiten und zu erzeugen. Es ist quasi ein gigantisches statistisches Modell für Wörter.</p>
-                        </div>
-                    </details>
-                    <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
-                        <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
-                            <span>Was bedeutet "Prompt"?</span>
-                            <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <div class="p-4 pt-0" style="color: var(--dlh-text-dark);">
-                            <p>Ein "Prompt" ist Ihre Anweisung oder Frage an die KI. Die Kunst des "Promptings" besteht darin, diese Anweisung so präzise wie möglich zu formulieren, um das bestmögliche Ergebnis zu erhalten.</p>
-                        </div>
-                    </details>
+                    <div class="p-4 rounded-lg border" style="border-color: var(--dlh-border);">
+                        <h3 class="font-bold text-lg mb-2 text-dlh-violet">4. Worauf soll sich die KI beziehen? (Input-Quelle)</h3>
+                        <p>Grenzen Sie den Wissensraum ein, indem Sie eine Quelle vorgeben. Z.B. eine Webseite, ein PDF, ein Text.</p>
+                    </div>
+                    <div class="p-4 rounded-lg border col-span-1 md:col-span-2" style="border-color: var(--dlh-border);">
+                        <h3 class="font-bold text-lg mb-2 text-dlh-violet">5. Wie soll es aussehen? (Output-Spezifikation)</h3>
+                        <p>Machen Sie Vorgaben zu Umfang, Sprachstil und medialer Ausgestaltung. Z.B. "kurz & prägnant", "formell", "multimedial".</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Interaktiver Prompt-Generator - Updated -->
+            <div class="p-6 rounded-lg mb-12 border" style="border-color: var(--dlh-border); background-color: var(--dlh-bg-light);">
+                <h2 class="font-bold text-xl text-dlh-dark mb-4">Interaktiver Prompt-Generator</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="prompt-was" class="font-semibold block mb-1">1. Was soll entstehen?</label>
+                        <select id="prompt-was" class="w-full p-2 border rounded-lg bg-white">
+                            <option value="Erstelle einen informativen Blog-Beitrag">Blog-Beitrag</option>
+                            <option value="Generiere den HTML- und CSS-Code für einen interaktiven Button">HTML/CSS-Code</option>
+                            <option value="Entwirf einen Bild-Prompt für eine eindrückliche Visualisierung">Bild-Prompt (für DALL-E etc.)</option>
+                            <option value="Gliedere die Folien für eine 10-minütige Präsentation">Präsentationsfolien</option>
+                            <option value="Fasse die Kernpunkte für eine Infografik zusammen">Infografik-Konzept</option>
+                            <option value="Erstelle eine Vergleichstabelle mit 4 Spalten">Vergleichstabelle</option>
+                            <option value="Schreibe eine professionelle E-Mail">Professionelle E-Mail</option>
+                            <option value="Entwirf ein Konzept für ein kurzes Erklärvideo">Konzept für Erklärvideo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="prompt-fuer-wen" class="font-semibold block mb-1">2. Für wen ist es bestimmt?</label>
+                         <select id="prompt-fuer-wen" class="w-full p-2 border rounded-lg bg-white">
+                            <option value="für Lernende im Betrieb (Detailhandel).">Zielgruppe: Lernende im Betrieb</option>
+                            <option value="für Gymnasiastinnen und Gymnasiasten im Fachbereich Biologie.">Zielgruppe: Gymnasiast/in</option>
+                            <option value="für eine Schulleitung der Sekundarstufe II.">Zielgruppe: Schulleitung</option>
+                            <option value="für IKT-Verantwortliche an Berufsfachschulen.">Zielgruppe: IKT-Verantwortliche/r</option>
+                            <option value="für Verantwortliche in einem Lehrbetrieb.">Zielgruppe: Lehrbetrieb</option>
+                            <option value="für Berufsschullehrpersonen im technischen Bereich.">Zielgruppe: Berufsschullehrperson</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="prompt-wofuer" class="font-semibold block mb-1">3. Wofür wird es gebraucht?</label>
+                        <select id="prompt-wofuer" class="w-full p-2 border rounded-lg bg-white">
+                            <option value="Der Output wird auf einer internen Schul-Webseite veröffentlicht.">Zweck: Interne Schul-Webseite</option>
+                            <option value="Es dient als Lehrmaterial für den Unterricht.">Zweck: Lehrmaterial</option>
+                            <option value="Es ist die Basis für einen Social Media Post.">Zweck: Social Media Post</option>
+                            <option value="Es dient als Grundlage für eine strategische Entscheidung.">Zweck: Strategische Entscheidung</option>
+                            <option value="Es dient zur Vorbereitung auf ein Qualifikationsverfahren (QV).">Zweck: QV-Vorbereitung</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="prompt-inhalte" class="font-semibold block mb-1">4. Worauf soll sich die KI beziehen?</label>
+                        <select id="prompt-inhalte" class="w-full p-2 border rounded-lg bg-white">
+                            <option value="Beziehe dich ausschliesslich auf die Inhalte der Webseite https://www.youtube.com/watch?v=v6NUpl4GxFQ.">Input: Internetseite</option>
+                            <option value="Analysiere den folgenden Text: [TEXT HIER EINFÜGEN].">Input: Text-Snippet</option>
+                            <option value="Interpretiere den folgenden HTML-Code: [CODE HIER EINFÜGEN].">Input: HTML-Code</option>
+                            <option value="Fasse die Kernaussagen des Videos zusammen, das wie folgt beschrieben wird: [VIDEOBESCHREIBUNG HIER EINFÜGEN].">Input: Video (via Beschreibung)</option>
+                            <option value="Nutze die Informationen aus dem angehängten PDF-Dokument.">Input: PDF-Dokument</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="prompt-wie" class="font-semibold block mb-1">5. Wie soll es aussehen?</label>
+                        <select id="prompt-wie" class="w-full p-2 border rounded-lg bg-white">
+                            <option value="Der Umfang soll kurz und prägnant sein (Stichworte).">Umfang: Kurz & prägnant (Stichworte)</option>
+                            <option value="Der Umfang soll ein ausführlicher Text mit mehreren Absätzen sein.">Umfang: Ausführlicher Text</option>
+                            <option value="Die Sprachart soll formell und professionell sein.">Sprachart: Formell & professionell</option>
+                            <option value="Die Sprachart soll einfach, klar und verständlich sein.">Sprachart: Einfach & verständlich</option>
+                            <option value="Der Output soll interaktiv sein und Fragen zur Selbstreflexion enthalten.">Output: Interaktiv mit Reflexionsfragen</option>
+                            <option value="Der Output soll multimedial sein und Vorschläge für passende Bilder oder Grafiken machen.">Output: Multimedial mit Bildvorschlägen</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="generatePrompt()" class="mt-4 font-bold py-2 px-6 rounded-lg" style="background-color: var(--dlh-violet); color: white;">Prompt erstellen</button>
+                
+                <div id="generated-prompt-container" class="mt-6 hidden">
+                    <h3 class="font-semibold text-lg mb-2">Dein generierter Prompt:</h3>
+                    <div class="prompt-code">
+                        <pre><code id="generated-prompt-text"></code></pre>
+                        <button class="copy-btn" onclick="copyGeneratedPrompt()">Kopieren</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Link to the new tutorial page -->
+            <div class="p-6 rounded-lg mb-12" style="background-color: #f0ebf5;">
+                <h2 class="font-bold text-xl text-dlh-dark mb-3">Noch tiefer eintauchen?</h2>
+                <p class="mb-4">Sie möchten die Prinzipien hinter guten Prompts von Grund auf lernen und interaktiv üben? Starten Sie unseren Meisterkurs mit integriertem Test-Chatbot.</p>
+                <a href="prompting-tutorial.html" class="inline-block font-bold py-3 px-6 rounded-lg" style="background-color: var(--dlh-orange); color: white;">
+                    Zum interaktiven Kurs <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
         </div>
     </div>
 
     <script>
-        const allTools = [
-            // ZH Empfohlen
-            { name: 'to-teach.ai', section: 'zh', description: 'Datenschutzkonformer KI-Assistent für Lehrpersonen zur Erstellung von Unterrichtsmaterialien.', use_case: 'Ideal für die schnelle Erstellung von Lektionsplänen und Aufgabenblättern.', link: 'https://to-teach.ai/' },
-            { name: 'Fobizz', section: 'zh', description: 'Plattform für Weiterbildungen und eine Sammlung von KI-Tools, die speziell für den Bildungsbereich entwickelt wurden.', use_case: 'Umfassende Unterstützung von der Planung bis zur Durchführung des Unterrichts.', link: 'https://fobizz.com/' },
-            { name: 'Adobe Creative Cloud', section: 'zh', description: 'Beinhaltet "Firefly", eine KI zur Erstellung kommerziell sicherer Bilder, Grafiken und Texteffekte.', use_case: 'Zur Erstellung von massgeschneidertem Bildmaterial für Präsentationen und Arbeitsblätter.', link: 'https://www.adobe.com/ch_de/products/firefly.html' },
-            { name: 'Statista', section: 'zh', description: 'Professionelle Datenbank für Statistiken und Daten, oft mit KI-gestützter Suche und Visualisierung.', use_case: 'Perfekt für die datenbasierte Recherche in Fächern wie Wirtschaft oder Geografie.', link: 'https://www.statista.com/' },
-            { name: 'fellofish', section: 'zh', description: 'Ein KI-Lernbuddy, der Lernende beim Verstehen von Inhalten unterstützt und Fragen beantwortet.', use_case: 'Zur individuellen Lernbegleitung und zur Förderung des selbstgesteuerten Lernens.', link: 'https://www.fellofish.ch/' },
-            { name: 'brian', section: 'zh', description: 'KI-Assistent, der per E-Mail funktioniert und Aufgaben wie Übersetzungen oder Zusammenfassungen erledigt.', use_case: 'Schnelle Hilfe für administrative Aufgaben ohne die Notwendigkeit einer separaten Plattform.', link: 'https://www.brian.ai/' },
-
-            // Kreativ & Interaktiv
-            { name: 'Canva', section: 'kreativ', description: 'Design-Plattform mit integrierten KI-Funktionen ("Magic Studio") für Präsentationen, Bilder und Layouts.', use_case: 'Erstellung von visuell ansprechenden Unterrichtsmaterialien und Schülerprojekten.', link: 'https://www.canva.com/' },
-            { name: 'Lumi Education', section: 'kreativ', description: 'Ermöglicht die Erstellung von interaktiven Lerninhalten und H5P-Aufgaben, teils KI-unterstützt.', use_case: 'Zur Erstellung von interaktiven Übungen, die direkt im Unterricht eingesetzt werden können.', link: 'https://lumi.education/' },
+        function generatePrompt() {
+            const was = document.getElementById('prompt-was').value.trim();
+            const fuerWen = document.getElementById('prompt-fuer-wen').value.trim();
+            const wofuer = document.getElementById('prompt-wofuer').value.trim();
+            const inhalte = document.getElementById('prompt-inhalte').value.trim();
+            const wie = document.getElementById('prompt-wie').value.trim();
             
-            // LLM Funktionen & Suche
-            { name: 'NotebookLM', section: 'suche', description: 'Googles KI-Notizbuch, das auf Basis eigener Dokumente (z.B. PDFs) Fragen beantwortet.', use_case: 'Ideal, um einen "Experten" zu spezifischen Quellen zu schaffen.', link: 'https://notebooklm.google.com/' },
-            { name: 'Claude', section: 'suche', description: 'Leistungsstarker Chatbot, der grosse Dokumente (z.B. PDFs) analysieren und zusammenfassen kann.', use_case: 'Für die interaktive Arbeit mit langen Texten oder Code direkt im Chat-Interface.', link: 'https://claude.ai/' },
-            { name: 'Le Chat (Mistral)', section: 'suche', description: 'Chatbot und Suchmaschine des europäischen Anbieters Mistral AI.', use_case: 'Eine europäische Alternative zu den US-Anbietern für Recherche und Texterstellung.', link: 'https://chat.mistral.ai/' },
-            { name: 'Opera Browser', section: 'suche', description: 'Webbrowser mit integrierter, kostenloser KI ("Aria"), die Seiten zusammenfassen kann.', use_case: 'Zur schnellen Recherche und Zusammenfassung von Webinhalten direkt beim Surfen.', link: 'https://www.opera.com/de/aria' },
-        ];
+            let promptParts = [was, fuerWen, wofuer, inhalte, wie];
+            const fullPrompt = promptParts.join(' ');
 
-        function renderTools(tools, containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
+            const container = document.getElementById('generated-prompt-container');
+            const textElement = document.getElementById('generated-prompt-text');
             
-            container.innerHTML = '';
-            tools.forEach(tool => {
-                const toolCard = `
-                <div class="flex flex-col justify-between p-4 rounded-lg border h-full" style="background-color: var(--dlh-bg-light); border-color: var(--dlh-border);">
-                    <div>
-                        <h4 class="font-bold text-lg text-dlh-violet">${tool.name}</h4>
-                        <p class="my-2 text-sm" style="color: var(--dlh-text-dark);">${tool.description}</p>
-                        <p class="my-2 p-2 text-sm rounded" style="background-color: #f0ebf5;"><strong>Einsatz-Idee:</strong> ${tool.use_case}</p>
-                    </div>
-                    <a href="${tool.link}" target="_blank" class="mt-3 hover:underline font-semibold self-start" style="color: var(--dlh-orange);">Besuchen &rarr;</a>
-                </div>
-                `;
-                container.innerHTML += toolCard;
+            textElement.innerText = fullPrompt;
+            container.classList.remove('hidden');
+        }
+
+        function copyGeneratedPrompt() {
+            const text = document.getElementById('generated-prompt-text').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Prompt in die Zwischenablage kopiert!');
             });
         }
-        
-        // Initial render on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderTools(allTools.filter(t => t.section === 'zh'), 'zh-tools-grid');
-            renderTools(allTools.filter(t => t.section === 'kreativ'), 'kreativ-tools-grid');
-            renderTools(allTools.filter(t => t.section === 'suche'), 'suche-tools-grid');
-        });
     </script>
 </body>
 </html>
