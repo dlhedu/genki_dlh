@@ -28,9 +28,33 @@
             box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.07);
             border-color: var(--dlh-violet);
         }
+        .yoda-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
 <body class="bg-white">
+
+    <!-- Einheitliche Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10 border-b" style="border-color: var(--dlh-border);">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-xl font-bold text-dlh-violet">KI im Unterricht</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="font-semibold text-dlh-violet border-b-2 border-dlh-violet pb-1">Startseite</a>
+                    <a href="grundlagen.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Grundlagen & Tools</a>
+                    <a href="prompting.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Prompting</a>
+                    <a href="praxisbeispiele.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Anwendungsfälle</a>
+                    <a href="faq.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <div class="container mx-auto px-4 py-8 md:py-12">
 
@@ -44,40 +68,71 @@
         <div class="mb-16 p-6 rounded-lg shadow-sm" style="background-color: var(--dlh-bg-light); border: 1px solid var(--dlh-border);">
             <h2 class="text-2xl font-bold mb-4 flex items-center text-dlh-dark"><i class="fas fa-bullhorn text-dlh-violet mr-3"></i>Aktuell im Fokus</h2>
             <div class="space-y-3" style="color: var(--dlh-text-dark);">
-                <p><strong>Text-zu-Video mit "Sora":</strong> OpenAI's neues Modell "Sora" revolutioniert die Erstellung von Videos aus Text. Dies eröffnet faszinierende Möglichkeiten für den Unterricht, z.B. zur Visualisierung historischer Ereignisse. <a href="#" class="text-dlh-orange hover:underline font-semibold">Mehr erfahren &rarr;</a></p>
-                <p><strong>Update für Gemini:</strong> Google hat sein KI-Modell "Gemini" erweitert und bietet nun erweiterte Analysefähigkeiten für Dokumente und Daten. Ideal für die Unterrichtsvorbereitung. <a href="#" class="text-dlh-orange hover:underline font-semibold">Was das für Sie bedeutet &rarr;</a></p>
+                <p><strong>Für die Praxis relevante Tools:</strong> Im Kanton Zürich stehen Lehrpersonen und Lernenden bewährte Plattformen zur Verfügung. <strong>Fobizz</strong> bietet Weiterbildungen und praxistaugliche KI-Werkzeuge, während <strong>to-teach.ai</strong> die Erstellung von Lehrmaterialien vereinfacht.</p>
+                <p><strong>Digitale Lehrmittel:</strong> Die <strong>digithek</strong> dient als zentrale Anlaufstelle für qualitätsgeprüfte, digitale Bildungsmedien, die den Unterrichtsalltag bereichern und den Lehrplan 21 unterstützen.</p>
             </div>
         </div>
 
         <!-- Navigations-Grid zu den Unterseiten -->
         <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
             <a href="grundlagen.html" class="nav-card bg-white p-6 rounded-lg border text-center">
                 <i class="fas fa-rocket text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Grundlagen & Tools</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Was ist KI und welche Werkzeuge gibt es?</p>
             </a>
-
             <a href="prompting.html" class="nav-card bg-white p-6 rounded-lg border text-center">
                 <i class="fas fa-terminal text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Prompting meistern</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Die Kunst der präzisen Anweisung an die KI.</p>
             </a>
-            
             <a href="praxisbeispiele.html" class="nav-card bg-white p-6 rounded-lg border text-center">
                 <i class="fas fa-lightbulb text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Praxisbeispiele</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Konkrete Use Cases für Ihren Unterricht.</p>
             </a>
-
             <a href="faq.html" class="nav-card bg-white p-6 rounded-lg border text-center">
                 <i class="fas fa-shield-alt text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Leitplanken (FAQ)</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Antworten zu Datenschutz, Urheberrecht & Co.</p>
             </a>
-
         </main>
+
+        <!-- Yoda Spruch Generator -->
+        <section class="mt-16 p-6 rounded-lg" style="background-color: var(--dlh-bg-light); border: 1px solid var(--dlh-border);">
+            <h2 class="text-2xl font-bold mb-4 text-center text-dlh-dark flex items-center justify-center gap-3">
+                <i class="fas fa-ghost text-green-500 text-3xl yoda-icon"></i>
+                Yoda Spruch Generator
+            </h2>
+            <div class="text-center">
+                <blockquote id="yoda-quote" class="text-xl italic p-4 my-4 border-l-4 border-dlh-orange bg-white rounded-r-lg min-h-[60px] flex items-center justify-center" style="color: var(--dlh-text-dark);">
+                    Viel zu lernen du noch hast.
+                </blockquote>
+                <button onclick="generateYodaQuote()" class="mt-4 font-bold py-2 px-6 rounded-lg" style="background-color: var(--dlh-violet); color: white;">Neue Weisheit, ich brauche</button>
+            </div>
+        </section>
+
     </div>
+
+    <script>
+        const yodaQuotes = [
+            "Viel zu lernen du noch hast.",
+            "TUE es oder TUE es nicht. Es gibt kein Versuchen.",
+            "Furcht der Pfad zur dunklen Seite ist. Furcht zu Zorn führt, Zorn zu Hass führt, Hass zu unsäglichem Leid führt.",
+            "Wahrlich wunderbar die Seele eines Kindes ist.",
+            "Geduld du haben musst, mein junger Padawan.",
+            "Der Tod ein natürlicher Teil des Lebens ist.",
+            "Verlieren du etwas, das du nie besessen, nicht kannst.",
+            "Größe ist nicht alles. Die kleinere Truppe wir sind, dafür größer im Geist.",
+            "Tue das, was du für richtig hältst. Die Zukunft ist nicht vorhersehbar.",
+            "In einem dunklen Ort wir uns befinden. Und ein wenig mehr Wissen das Dunkel erhellen kann."
+        ];
+
+        function generateYodaQuote() {
+            const quoteElement = document.getElementById('yoda-quote');
+            const randomIndex = Math.floor(Math.random() * yodaQuotes.length);
+            quoteElement.innerText = yodaQuotes[randomIndex];
+        }
+    </script>
 </body>
 </html>
 
