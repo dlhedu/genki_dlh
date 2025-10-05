@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting Meisterkurs - KI im Unterricht</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* DLH Design Integration */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --dlh-violet: #60388b;
+            --dlh-orange: #f39223;
+            --dlh-text-dark: #212529;
+            --dlh-text-light: #6c757d;
+            --dlh-border: #dee2e6;
+            --dlh-bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dlh-bg-light);
+        }
+
+        /* Original styles from your file, adapted for DLH colors */
+        .container-tutorial {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--dlh-border);
+        }
+        header.tutorial-header {
+            background-color: var(--dlh-violet);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        h1.tutorial-h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .progress-bar { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.3); border-radius: 4px; overflow: hidden; margin-top: 20px; }
+        .progress { height: 100%; background: white; transition: width 0.5s ease; width: 0%; }
+        .content { padding: 40px; }
+        .section { display: none; animation: fadeIn 0.5s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        h2.tutorial-h2 { color: var(--dlh-violet); margin-bottom: 20px; font-size: 2em; }
+        p, li { line-height: 1.8; color: var(--dlh-text-dark); margin-bottom: 15px; }
+        ul { margin-left: 20px; }
+        .tip-box { background: var(--dlh-bg-light); border-left: 4px solid var(--dlh-orange); padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .example-box { background: #f8f9fa; border: 2px dashed var(--dlh-violet); padding: 20px; margin: 20px 0; border-radius: 8px; font-family: 'Courier New', monospace; }
+        .navigation { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; }
+        button.tutorial-btn { background-color: var(--dlh-violet); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 1.1em; cursor: pointer; transition: background-color 0.3s ease; }
+        button.tutorial-btn:hover { background-color: #4a2c6d; }
+        button.tutorial-btn:disabled { background-color: #a394b7; cursor: not-allowed; }
+        .chat-container { background: #f8f9fa; border-radius: 12px; padding: 20px; height: 500px; display: flex; flex-direction: column; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 20px; background: white; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--dlh-border); }
+        .message { margin-bottom: 20px; padding: 15px; border-radius: 12px; animation: slideIn 0.3s ease; max-width: 80%; }
+        .message.user { background: var(--dlh-violet); color: white; margin-left: auto; }
+        .message.assistant { background: #e9ecef; color: #333; margin-right: auto; }
+        .message.system { background: #fff3e0; color: #e65100; text-align: center; font-style: italic; max-width: 100%; }
+        .chat-input-group { display: flex; gap: 10px; }
+        .chat-input { flex: 1; padding: 12px; border: 2px solid var(--dlh-border); border-radius: 8px; font-size: 1em; }
+        .chat-input:focus { outline: none; border-color: var(--dlh-violet); }
+        .send-button { padding: 12px 24px; }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Standard Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10 border-b" style="border-color: var(--dlh-border);">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-xl font-bold text-dlh-violet">KI im Unterricht</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="grundlagen.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Grundlagen & Tools</a>
+                    <a href="prompting.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Prompting</a>
+                    <a href="praxisbeispiele.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Anwendungsfälle</a>
+                    <a href="faq.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container-tutorial">
+        <header class="tutorial-header">
+            <h1 class="tutorial-h1">🚀 Prompting Meisterkurs</h1>
+            <p class="subtitle">Lerne die Kunst des effektiven Promptings</p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Section 1: Einführung -->
+            <div class="section active" id="section1">
+                <h2 class="tutorial-h2">Willkommen zum Prompting-Tutorial!</h2>
+                <p>In diesem interaktiven Kurs lernst du die wichtigsten Techniken für effektives Prompting mit KI-Modellen wie Claude, ChatGPT und anderen Large Language Models.</p>
+                <div class="tip-box">
+                    <strong>Was erwartet dich?</strong>
+                    <ul>
+                        <li>5 Kernprinzipien des effektiven Promptings</li>
+                        <li>Praktische Beispiele und Techniken</li>
+                        <li>Interaktiver Test mit einem echten KI-Chatbot</li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" disabled>Zurück</button>
+                    <button class="tutorial-btn" onclick="nextSection()">Los geht's!</button>
+                </div>
+            </div>
+
+            <!-- Section 2: Klarheit und Präzision -->
+            <div class="section" id="section2">
+                <h2 class="tutorial-h2">Prinzip 1: Klarheit und Präzision</h2>
+                <p>Der wichtigste Grundsatz beim Prompting ist Klarheit. Je präziser deine Anweisungen, desto besser die Ergebnisse.</p>
+                <h3>❌ Schlecht:</h3>
+                <div class="example-box">"Schreib was über Hunde"</div>
+                <h3>✅ Gut:</h3>
+                <div class="example-box">"Schreibe einen 200-Wörter-Artikel über die drei beliebtesten Hunderassen in Deutschland, mit Fokus auf ihre Charaktereigenschaften und Pflegebedürfnisse."</div>
+                <div class="tip-box">
+                    <strong>💡 Profi-Tipp:</strong> Verwende die W-Fragen (Was, Wie, Warum, Wann, Wo, Wer) um deinen Prompt zu strukturieren!
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="previousSection()">Zurück</button>
+                    <button class="tutorial-btn" onclick="nextSection()">Weiter</button>
+                </div>
+            </div>
+
+            <!-- Section 3: Kontext geben -->
+            <div class="section" id="section3">
+                <h2 class="tutorial-h2">Prinzip 2: Kontext bereitstellen</h2>
+                <p>KI-Modelle performen besser, wenn sie den Kontext und Zweck deiner Anfrage verstehen.</p>
+                <h3>Beispiel mit Kontext:</h3>
+                <div class="example-box">"Ich bin ein Biologielehrer und bereite eine Unterrichtsstunde für 8. Klässler vor. Erkläre das Konzept der Photosynthese in einfachen Worten mit einer alltäglichen Analogie."</div>
+                <div class="tip-box">
+                    <strong>Kontextelemente die du einbauen kannst:</strong>
+                    <ul>
+                        <li>Deine Rolle oder Hintergrund</li>
+                        <li>Die Zielgruppe</li>
+                        <li>Der Verwendungszweck</li>
+                        <li>Gewünschter Ton oder Stil</li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="previousSection()">Zurück</button>
+                    <button class="tutorial-btn" onclick="nextSection()">Weiter</button>
+                </div>
+            </div>
+
+            <!-- Section 4: Beispiele geben -->
+            <div class="section" id="section4">
+                <h2 class="tutorial-h2">Prinzip 3: Few-Shot Learning</h2>
+                <p>Few-Shot Learning bedeutet, der KI Beispiele zu geben, um das gewünschte Format oder den Stil zu demonstrieren.</p>
+                <h3>Beispiel-Prompt mit Few-Shot:</h3>
+                <div class="example-box">"Übersetze die folgenden Sätze ins Französische und füge eine umgangssprachliche Variante hinzu:<br><br>
+                    Beispiel:<br>
+                    Englisch: How are you?<br>
+                    Französisch (formal): Comment allez-vous?<br>
+                    Französisch (umgangssprachlich): Ça va?<br><br>
+                    Jetzt übersetze:<br>
+                    Englisch: Thank you very much"</div>
+                <div class="tip-box"><strong>📌 Merke:</strong> 1-3 gute Beispiele sind oft ausreichend, um das gewünschte Muster zu etablieren.</div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="previousSection()">Zurück</button>
+                    <button class="tutorial-btn" onclick="nextSection()">Weiter</button>
+                </div>
+            </div>
+
+            <!-- Section 5: Schritt-für-Schritt -->
+            <div class="section" id="section5">
+                <h2 class="tutorial-h2">Prinzip 4: Chain-of-Thought Prompting</h2>
+                <p>Bei komplexen Aufgaben hilft es, die KI anzuweisen, Schritt für Schritt zu denken.</p>
+                <h3>Beispiel für Chain-of-Thought:</h3>
+                <div class="example-box">"Löse folgende Aufgabe Schritt für Schritt:<br><br>
+                    Ein Zug fährt von Berlin nach München (600km) mit einer Durchschnittsgeschwindigkeit von 120 km/h. Er macht zwei Stopps von je 15 Minuten.<br><br>
+                    1. Berechne zuerst die reine Fahrzeit<br>
+                    2. Addiere die Pausenzeiten<br>
+                    3. Gib die Gesamtreisezeit an<br>
+                    4. Erkläre deine Rechnung"</div>
+                <div class="tip-box">
+                    <strong>Zauberwörter für bessere Ergebnisse:</strong>
+                    <ul>
+                        <li>"Denke Schritt für Schritt"</li>
+                        <li>"Erkläre deine Überlegungen"</li>
+                        <li>"Lass uns das systematisch angehen"</li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="previousSection()">Zurück</button>
+                    <button class="tutorial-btn" onclick="nextSection()">Weiter</button>
+                </div>
+            </div>
+
+            <!-- Section 6: Rollenspiele und Personas -->
+            <div class="section" id="section6">
+                <h2 class="tutorial-h2">Prinzip 5: Rollenspiele und Personas</h2>
+                <p>Du kannst der KI eine spezifische Rolle oder Expertise zuweisen für bessere Ergebnisse.</p>
+                <h3>Beispiele für Rollenzuweisungen:</h3>
+                <div class="example-box">"Du bist ein erfahrener Marketingexperte mit 20 Jahren Erfahrung in der Tech-Branche. Analysiere folgende Werbekampagne..."<br><br>
+                    "Agiere als freundlicher Kindergärtner und erkläre, warum wir uns die Hände waschen sollten..."<br><br>
+                    "Als professioneller Übersetzer mit Schwerpunkt Literatur, übersetze folgenden poetischen Text..."</div>
+                <div class="tip-box">
+                    <strong>🎭 Rollentipps:</strong>
+                    <ul>
+                        <li>Sei spezifisch bei der Expertise</li>
+                        <li>Erwähne relevante Erfahrung oder Hintergrund</li>
+                        <li>Definiere den gewünschten Kommunikationsstil</li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="previousSection()">Zurück</button>
+                    <button class="tutorial-btn" onclick="nextSection()">Zum Test!</button>
+                </div>
+            </div>
+
+            <!-- Section 7: Chatbot Test -->
+            <div class="section" id="section7">
+                <h2 class="tutorial-h2">🎯 Zeit für den Praxistest!</h2>
+                <div class="tip-box" style="background: #f0f9ff; border-left-color: #0284c7;">
+                    <strong>🤖 Teste dein Prompting-Wissen!</strong>
+                    <p style="margin-top: 10px;">Probiere die gelernten Techniken mit dem KI-Assistenten aus. Er wird deine Prompts analysieren und dir Feedback geben.</p>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message system">
+                            <strong>Willkommen zum interaktiven Test!</strong><br>Stelle mir Fragen oder gib mir Aufgaben. Ich helfe dir, deine Prompting-Fähigkeiten zu verbessern.
+                        </div>
+                    </div>
+                    <div class="chat-input-group">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Schreibe deinen Prompt hier..." onkeypress="handleKeyPress(event)" />
+                        <button class="tutorial-btn send-button" onclick="sendMessage()" id="sendButton">
+                            <span id="buttonText">Senden</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="previousSection()">Zurück zum Tutorial</button>
+                    <button class="tutorial-btn" onclick="showResults()">Ergebnisse</button>
+                </div>
+            </div>
+
+            <!-- Section 8: Ergebnisse -->
+            <div class="section" id="section8">
+                <h2 class="tutorial-h2">🏆 Glückwunsch!</h2>
+                <div class="p-6 text-center rounded-lg" style="background-color: var(--dlh-bg-light); border: 1px solid var(--dlh-border);">
+                    <h3 class="text-xl font-semibold">Du hast den Prompting-Kurs abgeschlossen!</h3>
+                    <p class="mt-2">Du bist jetzt bereit, effektive Prompts zu schreiben!</p>
+                </div>
+                <div class="tip-box">
+                    <strong>Zusammenfassung der wichtigsten Techniken:</strong>
+                    <ul>
+                        <li>✅ Klarheit und Präzision</li>
+                        <li>✅ Kontext und Hintergrundinformationen</li>
+                        <li>✅ Few-Shot Learning mit Beispielen</li>
+                        <li>✅ Chain-of-Thought für komplexe Aufgaben</li>
+                        <li>✅ Rollenzuweisungen für spezifische Expertise</li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <button class="tutorial-btn" onclick="restartTutorial()">Tutorial wiederholen</button>
+                    <a href="faq.html" class="tutorial-btn" style="text-decoration: none;">Zurück zur Übersicht</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 8;
+        const WORKER_API_URL = 'https://promptingbot.cglaus.workers.dev/';
+        let chatHistory = [];
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        function goToSection(sectionNumber) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('section' + sectionNumber).classList.add('active');
+            currentSection = sectionNumber;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+        function nextSection() { if (currentSection < totalSections) { goToSection(currentSection + 1); } }
+        function previousSection() { if (currentSection > 1) { goToSection(currentSection - 1); } }
+        function restartTutorial() { goToSection(1); }
+        function showResults() { goToSection(8); }
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            const sendButton = document.getElementById('sendButton');
+            const buttonText = document.getElementById('buttonText');
+            if (!message) return;
+            const messagesContainer = document.getElementById('chatMessages');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.textContent = message;
+            messagesContainer.appendChild(userMessage);
+            chatHistory.push({ role: 'user', content: message });
+            input.value = '';
+            input.disabled = true;
+            sendButton.disabled = true;
+            buttonText.textContent = '...';
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'message assistant';
+            loadingMessage.innerHTML = 'KI denkt nach...';
+            messagesContainer.appendChild(loadingMessage);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            try {
+                const response = await fetch(WORKER_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify({ message: message, history: chatHistory.slice(-10) })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'API-Anfrage fehlgeschlagen');
+                }
+                const data = await response.json();
+                messagesContainer.removeChild(loadingMessage);
+                const assistantMessage = document.createElement('div');
+                assistantMessage.className = 'message assistant';
+                assistantMessage.textContent = data.choices[0].message.content;
+                messagesContainer.appendChild(assistantMessage);
+                chatHistory.push({ role: 'assistant', content: data.choices[0].message.content });
+            } catch (error) {
+                messagesContainer.removeChild(loadingMessage);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'message system';
+                errorMessage.innerHTML = `<strong>❌ Fehler:</strong> ${error.message}`;
+                messagesContainer.appendChild(errorMessage);
+            } finally {
+                input.disabled = false;
+                sendButton.disabled = false;
+                buttonText.textContent = 'Senden';
+                input.focus();
+            }
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+        updateProgress();
+    </script>
+</body>
+</html>
+
