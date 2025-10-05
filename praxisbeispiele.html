@@ -1,1 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anwendungsfälle - KI im Lernprozess</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --dlh-violet: #60388b;
+            --dlh-orange: #f39223;
+            --dlh-text-dark: #212529;
+            --dlh-text-light: #6c757d;
+            --dlh-border: #dee2e6;
+            --dlh-bg-light: #f8f9fa;
+        }
+        body { font-family: 'Inter', sans-serif; color: var(--dlh-text-dark); }
+        .text-dlh-violet { color: var(--dlh-violet); }
+        .filter-btn-active {
+            background-color: var(--dlh-violet);
+            color: white;
+            border-color: var(--dlh-violet);
+        }
+        .prompt-code {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #4a5568;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        .copy-btn:hover {
+            background-color: #718096;
+        }
+        #search-input::placeholder {
+            color: var(--dlh-text-light);
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Einheitliche Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10 border-b" style="border-color: var(--dlh-border);">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-xl font-bold text-dlh-violet">KI im Unterricht</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="grundlagen.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Grundlagen & Tools</a>
+                    <a href="prompting.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Prompting</a>
+                    <a href="praxisbeispiele.html" class="font-semibold text-dlh-violet border-b-2 border-dlh-violet pb-1">Anwendungsfälle</a>
+                    <a href="faq.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <div class="bg-white p-8 rounded-lg">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-dlh-violet border-b pb-4" style="border-color: var(--dlh-border);"><i class="fas fa-microscope mr-3"></i>Anwendungsfälle: KI im Lernprozess</h1>
+            <p class="text-lg mb-8 max-w-4xl" style="color: var(--dlh-text-light);">Hier stehen konkrete Situationen aus dem Unterrichtsalltag im Zentrum. Suchen und filtern Sie, um zu entdecken, wie KI-Tools das Lernen effektiver, individueller und spannender gestalten können.</p>
+            
+            <!-- Such- und Filterleiste -->
+            <div class="mb-8 p-4 rounded-lg sticky top-[70px] bg-white bg-opacity-90 backdrop-blur-sm z-5" style="background-color: var(--dlh-bg-light);">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="relative flex-grow">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="search-input" onkeyup="filterAndSearch()" placeholder="Suche nach 'Lektionsplan', 'Bilder', 'Statista'..." class="w-full p-2 pl-10 border rounded-lg" style="border-color: var(--dlh-border);">
+                    </div>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <span class="font-bold mr-2">Filter:</span>
+                        <button class="filter-btn filter-btn-active py-2 px-4 rounded-lg font-semibold border text-sm" onclick="filterAndSearch('all', this)">Alle</button>
+                        <button class="filter-btn bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold border text-sm" onclick="filterAndSearch('differenzierung', this)">Differenzierung</button>
+                        <button class="filter-btn bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold border text-sm" onclick="filterAndSearch('aktivierung', this)">Aktivierung</button>
+                        <button class="filter-btn bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-semibold border text-sm" onclick="filterAndSearch('vorbereitung', this)">Vorbereitung</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8" id="example-container">
+                
+                <div class="example-card p-6 rounded-lg border" data-category="vorbereitung" style="border-color: var(--dlh-border);">
+                    <h2 class="font-bold text-xl mb-3 text-dlh-dark">Unterrichtsplanung beschleunigen</h2>
+                    <p class="p-4 rounded-lg mb-4 text-dlh-dark" style="background-color: #f0ebf5;"><b class="font-semibold">Situation:</b> Die Planung einer Lektion ist zeitintensiv, es fehlt an kreativen Ideen.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold text-dlh-violet mb-2">Tool-Empfehlung:</h3>
+                        <div class="p-3 rounded border" style="border-color: var(--dlh-border);"><b class="text-dlh-dark">to-teach.ai / Fobizz:</b> Diese Tools sind speziell für Lehrpersonen entwickelt und datenschutzkonform. Sie können ganze Lektionsentwürfe basierend auf dem Lehrplan generieren.</div>
+                    </div>
+                    <p><b class="font-semibold text-dlh-violet">Anwendungsidee:</b> Prompt für einen Lektionsplan-Entwurf, den Sie verfeinern können.</p>
+                    <div class="prompt-code mt-2">
+                        <pre><code>Erstelle einen Lektionsplan für eine 45-min-Lektion zum Thema "Fotosynthese" für eine 7. Klasse. Enthalten sein sollen: 3 Lernziele, ein kreativer Einstieg, Hauptaktivitäten und ein Abschluss.</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Kopieren</button>
+                    </div>
+                </div>
+
+                <div class="example-card p-6 rounded-lg border" data-category="differenzierung" style="border-color: var(--dlh-border);">
+                    <h2 class="font-bold text-xl mb-3 text-dlh-dark">Komplexe Texte zugänglich machen</h2>
+                    <p class="p-4 rounded-lg mb-4 text-dlh-dark" style="background-color: #f0ebf5;"><b class="font-semibold">Situation:</b> Lernende haben Mühe, einen Fachtext zu verstehen.</p>
+                     <div class="mb-4">
+                        <h3 class="font-semibold text-dlh-violet mb-2">Tool-Empfehlung:</h3>
+                        <div class="p-3 rounded border" style="border-color: var(--dlh-border);"><b class="text-dlh-dark">Fobizz (Textassistent):</b> Ideal, um Texte schnell in verschiedene Sprachniveaus zu übersetzen und Zusammenfassungen zu erstellen. Datenschutzkonform.</div>
+                    </div>
+                    <p><b class="font-semibold text-dlh-violet">Anwendungsidee:</b> Fachtext einfügen und in einfache Sprache für eine bestimmte Zielstufe umwandeln lassen.</p>
+                    <div class="prompt-code mt-2">
+                        <pre><code>Fasse den folgenden Fachtext über den Wasserkreislauf in einfacher Sprache zusammen (max. 12 Wörter pro Satz). Erkläre die Fachbegriffe mit Alltagsanalogien für 10-Jährige.
+
+[TEXT EINFÜGEN]</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Kopieren</button>
+                    </div>
+                </div>
+                
+                 <div class="example-card p-6 rounded-lg border" data-category="aktivierung" style="border-color: var(--dlh-border);">
+                    <h2 class="font-bold text-xl mb-3 text-dlh-dark">Faktenbasierte Argumente finden</h2>
+                    <p class="p-4 rounded-lg mb-4 text-dlh-dark" style="background-color: #f0ebf5;"><b class="font-semibold">Situation:</b> Für eine Debatte oder einen Aufsatz benötigen Lernende stichhaltige Daten und Grafiken, die aber oft schwer zu finden und zu interpretieren sind.</p>
+                     <div class="mb-4">
+                        <h3 class="font-semibold text-dlh-violet mb-2">Tool-Empfehlung:</h3>
+                        <div class="p-3 rounded border" style="border-color: var(--dlh-border);"><b class="text-dlh-dark">Statista:</b> Als Zürcher Schule haben Sie Zugriff auf diese professionelle Datenbank. Die KI-gestützte Suche hilft, komplexe Datensätze schnell zu finden und als verständliche Grafik herunterzuladen.</div>
+                    </div>
+                    <p><b class="font-semibold text-dlh-violet">Anwendungsidee:</b> Anstatt die Lernenden nur googeln zu lassen, geben Sie ihnen den Auftrag, in Statista drei Grafiken zu finden, die ihre These stützen und diese in ihre Argumentation einzubauen.</p>
+                </div>
+                
+                <div class="example-card p-6 rounded-lg border" data-category="aktivierung" style="border-color: var(--dlh-border);">
+                    <h2 class="font-bold text-xl mb-3 text-dlh-dark">Abstrakte Konzepte visualisieren</h2>
+                    <p class="p-4 rounded-lg mb-4 text-dlh-dark" style="background-color: #f0ebf5;"><b class="font-semibold">Situation:</b> Ein komplexer biologischer Prozess oder eine historische Szene soll visualisiert werden, aber es gibt kein passendes Bildmaterial.</p>
+                     <div class="mb-4">
+                        <h3 class="font-semibold text-dlh-violet mb-2">Tool-Empfehlung:</h3>
+                        <div class="p-3 rounded border" style="border-color: var(--dlh-border);"><b class="text-dlh-dark">Adobe Firefly (in Creative Cloud):</b> Firefly ist darauf trainiert, kommerziell sichere Bilder zu erstellen. Ideal für die Erstellung von massgeschneiderten Grafiken für Arbeitsblätter oder Präsentationen.</div>
+                    </div>
+                    <p><b class="font-semibold text-dlh-violet">Anwendungsidee:</b> Lernende erstellen Bilder, die ihre Interpretation eines Gedichts oder eines wissenschaftlichen Konzepts darstellen.</p>
+                    <div class="prompt-code mt-2">
+                        <pre><code>Ein Bild im Stil einer wissenschaftlichen Infografik, das den Prozess der Zellteilung (Mitose) zeigt, mit klaren Beschriftungen für die Phasen: Prophase, Metaphase, Anaphase, Telophase.</code></pre>
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Kopieren</button>
+                    </div>
+                </div>
+
+            </div>
+            <div id="no-results" class="hidden text-center py-12">
+                <i class="fas fa-search fa-3x text-gray-400 mb-4"></i>
+                <p class="text-xl text-gray-600">Keine Anwendungsfälle für Ihre Suche gefunden.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let activeCategory = 'all';
+
+        function filterAndSearch(category = activeCategory, button = null) {
+            // Update active category and button style
+            if (button) {
+                activeCategory = category;
+                const buttons = document.querySelectorAll('.filter-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('filter-btn-active');
+                    btn.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                button.classList.add('filter-btn-active');
+                button.classList.remove('bg-gray-100', 'text-gray-700');
+            }
+
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const examples = document.querySelectorAll('.example-card');
+            const noResults = document.getElementById('no-results');
+            let resultsFound = false;
+
+            examples.forEach(card => {
+                const categoryMatch = activeCategory === 'all' || card.dataset.category === activeCategory;
+                const cardText = card.innerText.toLowerCase();
+                const searchMatch = cardText.includes(searchTerm);
+
+                if (categoryMatch && searchMatch) {
+                    card.style.display = 'block';
+                    resultsFound = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (resultsFound) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        function copyToClipboard(button) {
+            const pre = button.closest('.prompt-code').querySelector('pre');
+            const code = pre.querySelector('code').innerText;
+            navigator.clipboard.writeText(code);
+            button.innerText = 'Kopiert!';
+            setTimeout(() => {
+                button.innerText = 'Kopieren';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+
 
