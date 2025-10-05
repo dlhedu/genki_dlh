@@ -9,16 +9,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         :root {
-            --dlh-blue: #0065a4;
+            --dlh-violet: #60388b;
+            --dlh-orange: #f39223;
             --dlh-text-dark: #212529;
             --dlh-text-light: #6c757d;
             --dlh-border: #dee2e6;
             --dlh-bg-light: #f8f9fa;
         }
         body { font-family: 'Inter', sans-serif; color: var(--dlh-text-dark); }
-        .text-dlh-blue { color: var(--dlh-blue); }
-        .bg-dlh-blue { background-color: var(--dlh-blue); }
-        .border-dlh-blue { border-color: var(--dlh-blue); }
+        .text-dlh-violet { color: var(--dlh-violet); }
+        .text-dlh-orange { color: var(--dlh-orange); }
         .nav-card {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             border-color: var(--dlh-border);
@@ -26,7 +26,7 @@
         .nav-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.07);
-            border-color: var(--dlh-blue);
+            border-color: var(--dlh-violet);
         }
     </style>
 </head>
@@ -36,16 +36,16 @@
 
         <!-- Header -->
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-dlh-blue mb-4">KI im Unterricht: Vom Wissen zur Praxis</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-dlh-violet mb-4">KI im Unterricht: Vom Wissen zur Praxis</h1>
             <p class="text-xl max-w-3xl mx-auto" style="color: var(--dlh-text-light);">Ihr interaktiver Leitfaden, um KI-Potenziale zu entdecken, Techniken zu meistern und Unterricht aktiv zu transformieren.</p>
         </header>
 
         <!-- Aktuelles & Wichtiges -->
         <div class="mb-16 p-6 rounded-lg shadow-sm" style="background-color: var(--dlh-bg-light); border: 1px solid var(--dlh-border);">
-            <h2 class="text-2xl font-bold mb-4 flex items-center text-dlh-dark"><i class="fas fa-bullhorn text-dlh-blue mr-3"></i>Aktuell im Fokus</h2>
+            <h2 class="text-2xl font-bold mb-4 flex items-center text-dlh-dark"><i class="fas fa-bullhorn text-dlh-violet mr-3"></i>Aktuell im Fokus</h2>
             <div class="space-y-3" style="color: var(--dlh-text-dark);">
-                <p><strong>Text-zu-Video mit "Sora":</strong> OpenAI's neues Modell "Sora" revolutioniert die Erstellung von Videos aus Text. Dies eröffnet faszinierende Möglichkeiten für den Unterricht, z.B. zur Visualisierung historischer Ereignisse. <a href="#" class="text-dlh-blue hover:underline font-semibold">Mehr erfahren &rarr;</a></p>
-                <p><strong>Update für Gemini:</strong> Google hat sein KI-Modell "Gemini" erweitert und bietet nun erweiterte Analysefähigkeiten für Dokumente und Daten. Ideal für die Unterrichtsvorbereitung. <a href="#" class="text-dlh-blue hover:underline font-semibold">Was das für Sie bedeutet &rarr;</a></p>
+                <p><strong>Text-zu-Video mit "Sora":</strong> OpenAI's neues Modell "Sora" revolutioniert die Erstellung von Videos aus Text. Dies eröffnet faszinierende Möglichkeiten für den Unterricht, z.B. zur Visualisierung historischer Ereignisse. <a href="#" class="text-dlh-orange hover:underline font-semibold">Mehr erfahren &rarr;</a></p>
+                <p><strong>Update für Gemini:</strong> Google hat sein KI-Modell "Gemini" erweitert und bietet nun erweiterte Analysefähigkeiten für Dokumente und Daten. Ideal für die Unterrichtsvorbereitung. <a href="#" class="text-dlh-orange hover:underline font-semibold">Was das für Sie bedeutet &rarr;</a></p>
             </div>
         </div>
 
@@ -53,25 +53,25 @@
         <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
             <a href="grundlagen.html" class="nav-card bg-white p-6 rounded-lg border text-center">
-                <i class="fas fa-rocket text-3xl text-dlh-blue mb-4"></i>
+                <i class="fas fa-rocket text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Grundlagen & Tools</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Was ist KI und welche Werkzeuge gibt es?</p>
             </a>
 
             <a href="prompting.html" class="nav-card bg-white p-6 rounded-lg border text-center">
-                <i class="fas fa-terminal text-3xl text-dlh-blue mb-4"></i>
+                <i class="fas fa-terminal text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Prompting meistern</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Die Kunst der präzisen Anweisung an die KI.</p>
             </a>
             
             <a href="praxisbeispiele.html" class="nav-card bg-white p-6 rounded-lg border text-center">
-                <i class="fas fa-lightbulb text-3xl text-dlh-blue mb-4"></i>
+                <i class="fas fa-lightbulb text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Praxisbeispiele</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Konkrete Use Cases für Ihren Unterricht.</p>
             </a>
 
             <a href="faq.html" class="nav-card bg-white p-6 rounded-lg border text-center">
-                <i class="fas fa-shield-alt text-3xl text-dlh-blue mb-4"></i>
+                <i class="fas fa-shield-alt text-3xl text-dlh-violet mb-4"></i>
                 <h2 class="text-xl font-bold">Leitplanken (FAQ)</h2>
                 <p class="mt-2" style="color: var(--dlh-text-light);">Antworten zu Datenschutz, Urheberrecht & Co.</p>
             </a>
@@ -80,5 +80,4 @@
     </div>
 </body>
 </html>
-
 
