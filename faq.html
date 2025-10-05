@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitplanken & FAQ - KI im Unterricht</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --dlh-violet: #60388b;
+            --dlh-orange: #f39223;
+            --dlh-text-dark: #212529;
+            --dlh-text-light: #6c757d;
+            --dlh-border: #dee2e6;
+            --dlh-bg-light: #f8f9fa;
+        }
+        body { font-family: 'Inter', sans-serif; color: var(--dlh-text-dark); }
+        .text-dlh-violet { color: var(--dlh-violet); }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary .arrow-down { transform: rotate(180deg); }
+        details[open] summary { color: var(--dlh-violet); }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Einheitliche Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10 border-b" style="border-color: var(--dlh-border);">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-xl font-bold text-dlh-violet">KI im Unterricht</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="grundlagen.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Grundlagen & Tools</a>
+                    <a href="prompting.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Prompting</a>
+                    <a href="praxisbeispiele.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Anwendungsfälle</a>
+                    <a href="faq.html" class="font-semibold text-dlh-violet border-b-2 border-dlh-violet pb-1">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <div class="bg-white p-8 rounded-lg">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-dlh-violet border-b pb-4" style="border-color: var(--dlh-border);"><i class="fas fa-shield-alt mr-3"></i>Leitplanken & Szenarien</h1>
+            <p class="text-lg mb-10 max-w-4xl" style="color: var(--dlh-text-light);">Wenn KI in der Praxis erprobt wird, tauchen unweigerlich Fragen auf. Diese Seite dient als Orientierungshilfe für typische Situationen aus dem Schulalltag und unterstützt eine reflektierte und sichere Anwendungskultur.</p>
+            
+            <div class="space-y-4">
+                <!-- Szenario 1 -->
+                <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
+                    <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
+                        <span>Szenario: Dürfen Lernende KI für Hausaufgaben nutzen?</span>
+                        <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 space-y-3" style="color: var(--dlh-text-dark);">
+                        <p>Dies ist eine Frage der Haltung und der schulischen Richtlinien. Anstatt eines pauschalen Verbots empfiehlt sich ein transparenter und kompetenzorientierter Ansatz:</p>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li><b>Transparenz einfordern:</b> Lernende müssen KI-generierte Passagen klar kennzeichnen und ihre verwendeten Prompts offenlegen.</li>
+                            <li><b>Prozess vor Produkt:</b> Bewerten Sie nicht nur das Endresultat, sondern auch den Arbeitsprozess. Wie wurde die KI als Werkzeug genutzt? Wie kritisch wurde der Output hinterfragt und überarbeitet?</li>
+                            <li><b>Richtlinien beachten:</b> Klären Sie die schul- und kantonspezifischen Vorgaben. Beachten Sie die Altersfreigaben der jeweiligen Tools (z.B. ChatGPT ab 13, mit elterl. Zustimmung bis 18).</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Szenario 2 -->
+                <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
+                    <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
+                        <span>Szenario: Wie gehe ich mit KI-Fehlern ("Halluzinationen") um?</span>
+                        <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 space-y-3" style="color: var(--dlh-text-dark);">
+                        <p>Betrachten Sie KI-Fehler als eine wertvolle Lerngelegenheit. Sie eignen sich hervorragend, um Medien- und Informationskompetenz zu schulen.</p>
+                         <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li><b>Als "Challenging Task":</b> Geben Sie den Lernenden bewusst einen KI-Text mit Fehlern und beauftragen Sie sie, diese zu finden, zu korrigieren und die Quellen zu überprüfen.</li>
+                            <li><b>Quellenkritik trainieren:</b> Nutzen Sie die Fehler, um den Unterschied zwischen einer plausibel klingenden Aussage und einer belegten Tatsache zu verdeutlichen. Verweisen Sie auf verlässliche Quellen wie <b class="font-semibold">Statista</b>.</li>
+                            <li><b>Grundprinzip erklären:</b> Machen Sie transparent, dass eine KI nicht "weiss", was wahr ist, sondern nur statistisch wahrscheinliche Wortfolgen generiert.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Szenario 3 -->
+                <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
+                    <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
+                        <span>Szenario: Welche Daten darf ich in die KI eingeben?</span>
+                        <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 space-y-3" style="color: var(--dlh-text-dark);">
+                        <p>Hier gilt eine goldene Regel: <b class="font-semibold">Keine Personendaten oder andere sensible Informationen eingeben.</b></p>
+                        <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li><b>Anonymisieren:</b> Namen, Adressen, Noten oder persönliche Details von Lernenden, Eltern oder Kollegen haben in öffentlichen KI-Tools nichts zu suchen. Ersetzen Sie Namen durch Platzhalter (z.B. "Schüler A").</li>
+                            <li><b>Datenschutzkonforme Tools nutzen:</b> Für den Schulalltag sind geprüfte Plattformen wie <b class="font-semibold">Fobizz</b> oder <b class="font-semibold">to-teach.ai</b> die sicherste Wahl, da sie speziell für den Bildungsbereich entwickelt wurden.</li>
+                            <li><b>Urheberrecht beachten:</b> Laden Sie keine urheberrechtlich geschützten Texte oder Bilder in grossen Mengen hoch, deren Rechte Sie nicht besitzen.</li>
+                        </ul>
+                    </div>
+                </details>
+                
+                <!-- Szenario 4 -->
+                <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
+                    <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
+                        <span>Szenario: Verlernen die Lernenden das selbstständige Denken?</span>
+                        <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 space-y-3" style="color: var(--dlh-text-dark);">
+                        <p>Diese Sorge ist berechtigt, aber sie lässt sich durch einen bewussten didaktischen Einsatz entkräften. Der Fokus verschiebt sich von reiner Wissensreproduktion hin zu höheren Denk- und Arbeitsprozessen.</p>
+                         <ul class="list-disc list-inside space-y-2 pl-4">
+                            <li><b>KI als Werkzeug, nicht als Ersatz:</b> Vergleichen Sie die KI mit einem Taschenrechner. Man muss trotzdem verstehen, was eine Multiplikation ist, um ihn sinnvoll einzusetzen.</li>
+                            <li><b>Neue Kompetenzen fördern:</b> Die zentralen Fähigkeiten sind nun das Stellen der richtigen Fragen (Prompting), das kritische Bewerten von Ergebnissen, das kreative Weiterentwickeln von KI-Vorschlägen und das ethische Reflektieren des Einsatzes.</li>
+                            <li><b>Aufgaben anpassen:</b> Gestalten Sie Aufgaben so, dass die KI als Hilfsmittel dient, aber die eigentliche Denkleistung (z.B. Analyse, Vergleich, Bewertung, kreative Synthese) bei den Lernenden bleibt.</li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
 
