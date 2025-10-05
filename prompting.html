@@ -166,10 +166,10 @@
                 
                 <div id="generated-prompt-container" class="mt-6 hidden">
                     <h3 class="font-semibold text-lg mb-2">Dein generierter Prompt:</h3>
-                    <div class="prompt-code">
-                        <pre><code id="generated-prompt-text"></code></pre>
-                        <button class="copy-btn" onclick="copyGeneratedPrompt()">Kopieren</button>
+                    <div class="prompt-code" id="generated-prompt-text">
+                        <!-- Generated prompt will be inserted here -->
                     </div>
+                    <button class="copy-btn mt-2" onclick="copyGeneratedPrompt()">Kopieren</button>
                 </div>
             </div>
             
@@ -199,8 +199,15 @@
             const container = document.getElementById('generated-prompt-container');
             const textElement = document.getElementById('generated-prompt-text');
             
+            // We directly set the innerText of the styled div
             textElement.innerText = fullPrompt;
             container.classList.remove('hidden');
+
+            // Adjust copy button position relative to the new structure
+            const copyButton = container.querySelector('.copy-btn');
+            if(copyButton) {
+               container.querySelector('.prompt-code').appendChild(copyButton);
+            }
         }
 
         function copyGeneratedPrompt() {
