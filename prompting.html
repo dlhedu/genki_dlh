@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting meistern - KI im Unterricht</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --dlh-violet: #60388b;
+            --dlh-orange: #f39223;
+            --dlh-text-dark: #212529;
+            --dlh-text-light: #6c757d;
+            --dlh-border: #dee2e6;
+            --dlh-bg-light: #f8f9fa;
+        }
+        body { font-family: 'Inter', sans-serif; color: var(--dlh-text-dark); }
+        .text-dlh-violet { color: var(--dlh-violet); }
+        .bg-dlh-violet { background-color: var(--dlh-violet); }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary .arrow-down { transform: rotate(180deg); }
+        details[open] summary { color: var(--dlh-violet); }
+        .prompt-example-bad { border-left: 4px solid #c0392b; }
+        .prompt-example-good { border-left: 4px solid #27ae60; }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Einheitliche Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10 border-b" style="border-color: var(--dlh-border);">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-xl font-bold text-dlh-violet">KI im Unterricht</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="grundlagen.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Grundlagen & Tools</a>
+                    <a href="prompting.html" class="font-semibold text-dlh-violet border-b-2 border-dlh-violet pb-1">Prompting</a>
+                    <a href="praxisbeispiele.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">Praxisbeispiele</a>
+                    <a href="faq.html" class="font-medium hover:text-dlh-violet" style="color: var(--dlh-text-light);">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <div class="bg-white p-8 rounded-lg">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-dlh-violet border-b pb-4" style="border-color: var(--dlh-border);"><i class="fas fa-terminal mr-3"></i>Prompting meistern: Die Kunst der Anweisung</h1>
+            <p class="text-lg mb-8 max-w-4xl" style="color: var(--dlh-text-light);">Ein "Prompt" ist Ihre Anweisung an die KI. Je präziser Sie formulieren, desto besser, relevanter und nützlicher wird das Ergebnis. Betrachten Sie es nicht als Google-Suche, sondern als Arbeitsanweisung an einen Assistenten.</p>
+            
+            <!-- Die 4 Kern-Zutaten -->
+             <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-dlh-dark">Die 4 Kern-Zutaten eines guten Prompts</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-4 rounded-lg" style="background-color: var(--dlh-bg-light);"><b class="text-dlh-violet">1. Rolle:</b> Weisen Sie der KI eine Rolle zu. ("Handle als Geschichtslehrer...")</div>
+                    <div class="p-4 rounded-lg" style="background-color: var(--dlh-bg-light);"><b class="text-dlh-violet">2. Kontext:</b> Geben Sie den nötigen Hintergrund. ("...für eine 9. Klasse...")</div>
+                    <div class="p-4 rounded-lg" style="background-color: var(--dlh-bg-light);"><b class="text-dlh-violet">3. Aufgabe:</b> Formulieren Sie die genaue Aufgabe. ("Erstelle 3 Prüfungsfragen...")</div>
+                    <div class="p-4 rounded-lg" style="background-color: var(--dlh-bg-light);"><b class="text-dlh-violet">4. Format:</b> Definieren Sie das gewünschte Ergebnis. ("...im Multiple-Choice-Format.")</div>
+                </div>
+            </div>
+            
+            <!-- INTERAKTIVER PROMPT-BUILDER -->
+            <div class="p-6 rounded-lg mb-12" style="background-color: var(--dlh-bg-light); border: 1px solid var(--dlh-border);">
+                <h2 class="font-semibold text-2xl mb-4 text-dlh-dark">Interaktiver Prompt-Builder</h2>
+                <p class="mb-4">Bauen Sie Ihren eigenen Prompt, indem Sie die Felder ausfüllen. Beobachten Sie, wie sich die Anweisung zusammensetzt.</p>
+                <div class="space-y-4" id="prompt-builder">
+                    <div>
+                        <label for="rolle" class="font-semibold block mb-1">1. Rolle <span class="text-sm font-normal text-gray-500">(Wer soll die KI sein?)</span></label>
+                        <input type="text" id="rolle" placeholder="z.B. Handle als Biologielehrer für die Sekundarstufe..." class="w-full p-2 border rounded" style="border-color: var(--dlh-border);">
+                    </div>
+                    <div>
+                        <label for="kontext" class="font-semibold block mb-1">2. Kontext <span class="text-sm font-normal text-gray-500">(Für wen oder was?)</span></label>
+                        <input type="text" id="kontext" placeholder="z.B. ich bereite eine Lektion für eine 8. Klasse zum Thema Zellteilung vor..." class="w-full p-2 border rounded" style="border-color: var(--dlh-border);">
+                    </div>
+                    <div>
+                        <label for="aufgabe" class="font-semibold block mb-1">3. Aufgabe <span class="text-sm font-normal text-gray-500">(Was soll die KI tun?)</span></label>
+                        <input type="text" id="aufgabe" placeholder="z.B. erstelle eine einfache Analogie, die den Unterschied zwischen Mitose und Meiose erklärt..." class="w-full p-2 border rounded" style="border-color: var(--dlh-border);">
+                    </div>
+                    <div>
+                        <label for="format" class="font-semibold block mb-1">4. Format <span class="text-sm font-normal text-gray-500">(Wie soll das Ergebnis aussehen?)</span></label>
+                        <input type="text" id="format" placeholder="z.B. gib die Antwort als kurzen Absatz mit maximal 50 Wörtern aus." class="w-full p-2 border rounded" style="border-color: var(--dlh-border);">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h3 class="font-semibold text-xl text-dlh-dark">Ihr generierter Prompt zum Kopieren:</h3>
+                    <div id="prompt-output" class="mt-2 p-4 bg-white rounded font-mono text-sm min-h-[120px] border" style="border-color: var(--dlh-border);"></div>
+                    <button onclick="copyPrompt()" class="mt-4 bg-dlh-violet hover:opacity-90 text-white py-2 px-4 rounded-lg flex items-center font-semibold"><i class="fas fa-copy mr-2"></i>In die Zwischenablage kopieren</button>
+                    <span id="copy-feedback" class="ml-4 text-green-600 hidden">Kopiert!</span>
+                </div>
+            </div>
+
+             <!-- Prompting Tipps: Vorher & Nachher -->
+            <h2 class="text-2xl font-bold pt-6 text-dlh-dark border-t" style="border-color: var(--dlh-border);">Von Vage zu Präzise: Eine Galerie</h2>
+             <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <!-- Beispiel 1: Geschichte -->
+                <div class="space-y-4">
+                    <div class="p-4 rounded-lg bg-gray-50 prompt-example-bad"><h3 class="font-bold">Vorher (Geschichte)</h3><p class="font-mono text-sm mt-1 p-2 bg-white rounded">"Erkläre die Französische Revolution."</p></div>
+                    <div class="p-4 rounded-lg bg-gray-50 prompt-example-good"><h3 class="font-bold">Nachher (Präzise)</h3><p class="font-mono text-sm mt-1 p-2 bg-white rounded">"Erstelle eine Stichpunktliste mit den 5 Hauptursachen der Französischen Revolution. Formuliere die Punkte so, dass sie für 14-jährige Schüler verständlich sind."</p></div>
+                </div>
+                <!-- Beispiel 2: Sprachen -->
+                <div class="space-y-4">
+                    <div class="p-4 rounded-lg bg-gray-50 prompt-example-bad"><h3 class="font-bold">Vorher (Sprachen)</h3><p class="font-mono text-sm mt-1 p-2 bg-white rounded">"Übersetze 'sich freuen auf'."</p></div>
+                    <div class="p-4 rounded-lg bg-gray-50 prompt-example-good"><h3 class="font-bold">Nachher (Präzise)</h3><p class="font-mono text-sm mt-1 p-2 bg-white rounded">"Gib mir drei englische Übersetzungen für den deutschen Ausdruck 'sich freuen auf'. Erkläre die feinen Unterschiede in der Bedeutung und gib für jede Übersetzung einen Beispielsatz."</p></div>
+                </div>
+             </div>
+
+             <!-- Advanced Techniques -->
+            <h2 class="text-2xl font-bold mt-16 mb-6 text-dlh-dark border-t pt-8" style="border-color: var(--dlh-border);">Tipps für Fortgeschrittene</h2>
+            <div class="space-y-4">
+                <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
+                    <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
+                        <span>Negative Anweisungen geben ("Was du nicht tun sollst")</span>
+                        <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0" style="color: var(--dlh-text-dark);"><p>Manchmal ist es hilfreich, der KI explizit zu sagen, was sie vermeiden soll. <br><b>Beispiel:</b> "... Erkläre den Begriff Fotosynthese. Verwende dabei keine Fachbegriffe wie 'Chlorophyll' oder 'ATP'."</p></div>
+                </details>
+                <details class="group border rounded-lg" style="border-color: var(--dlh-border);">
+                    <summary class="flex justify-between items-center w-full p-4 font-semibold text-left cursor-pointer text-lg">
+                        <span>Schritt-für-Schritt-Denken anregen ("Chain of Thought")</span>
+                        <span class="arrow-down transition-transform duration-300"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0" style="color: var(--dlh-text-dark);"><p>Bei komplexen Aufgaben (z.B. Textaufgaben in Mathe) führen bessere Ergebnisse, wenn Sie die KI anweisen, ihre Gedanken zu strukturieren. <br><b>Beispiel:</b> "... Löse die folgende Textaufgabe. Erkläre zuerst, welche Informationen gegeben sind, zeige dann deinen Lösungsweg Schritt für Schritt und gib am Ende die Antwort."</p></div>
+                </details>
+            </div>
+        </div>
+    </div>
+    <script>
+        const promptInputs = document.querySelectorAll('#prompt-builder input');
+        const promptOutput = document.getElementById('prompt-output');
+        const copyFeedback = document.getElementById('copy-feedback');
+
+        function generatePrompt() {
+            const rolle = document.getElementById('rolle').value;
+            const kontext = document.getElementById('kontext').value;
+            const aufgabe = document.getElementById('aufgabe').value;
+            const format = document.getElementById('format').value;
+            promptOutput.textContent = [rolle, kontext, aufgabe, format].filter(Boolean).join(' ');
+        }
+        
+        promptInputs.forEach(input => input.addEventListener('keyup', generatePrompt));
+
+        function copyPrompt() {
+            if (promptOutput.textContent.trim()) {
+                navigator.clipboard.writeText(promptOutput.textContent);
+                copyFeedback.classList.remove('hidden');
+                setTimeout(() => {
+                    copyFeedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+        
+        // Initial call
+        generatePrompt();
+    </script>
+</body>
+</html>
+
 
